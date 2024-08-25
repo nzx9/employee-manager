@@ -1,0 +1,51 @@
+services:
+  # web:
+  #   build:
+  #     context: ./web
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "13000:3000"
+  #   environment:
+  #     - NEXT_PUBLIC_API_URL=http://localhost:5000
+  #   depends_on:
+  #     - api
+  #   networks:
+  #     - net
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "15000:5000"
+    depends_on:
+      - db
+    networks:
+      - net
+
+  db:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=employee_manager
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - net
+
+  api-tests:
+    build: ./api
+    command: npm test
+    depends_on:
+      - db
+
+networks:
+  net:
+    driver: bridge
+
+volumes:
+  postgres_data:
