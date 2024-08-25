@@ -1,4 +1,4 @@
-export default (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   const Employee = sequelize.define('Employee', {
     firstName: {
       type: DataTypes.STRING,
@@ -27,7 +27,7 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        is: /^+94[0-9]{10}$/,
+        is: /^\+94[0-9]{9}$/,
       },
     },
     gender: {
