@@ -81,8 +81,16 @@ function onError(error) {
  * Event listener for HTTP server "listening" event.
  */
 
-function onListening() {
+async function onListening() {
   var addr = server.address();
+
+  try {
+    await sequelize.authenticate();
+    console.log('DB connection success');
+  } catch (error) {
+    console.error('DB connection failed: ', error);
+  }
+  
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
