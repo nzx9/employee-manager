@@ -15,6 +15,7 @@ services:
       context: ./api
       dockerfile: Dockerfile
     env_file: docker-compose.env
+    restart: always
     ports:
       - "15000:5000"
     depends_on:
