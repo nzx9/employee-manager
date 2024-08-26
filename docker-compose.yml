@@ -1,21 +1,22 @@
 services:
-  # web:
-  #   build:
-  #     context: ./web
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "13000:3000"
-  #   environment:
-  #     - NEXT_PUBLIC_API_URL=http://localhost:5000
-  #   depends_on:
-  #     - api
-  #   networks:
-  #     - net
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_API_URL=http://localhost:5000
+    depends_on:
+      - api
+    networks:
+      - net
 
   api:
     build:
       context: ./api
       dockerfile: Dockerfile
+    env_file: docker-compose.env
     ports:
       - "15000:5000"
     depends_on:
@@ -29,7 +30,7 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=employee_manager
+      - POSTGRES_DB=postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
@@ -37,12 +38,19 @@ services:
     networks:
       - net
 
-  api-tests:
-    build: ./api
-    command: npm test
+  migrations:
+    build: migrations
+    command: -connectRetries=20 migrate
+    environment:
+      FLYWAY_USER: 'postgres'
+      FLYWAY_MIXED: 'true'
+      FLYWAY_PASSWORD: 'postgres'
+      FLYWAY_URL: 'jdbc:postgresql://db:5432/postgres'
     depends_on:
       - db
-
+    networks:
+      - net
+      
 networks:
   net:
     driver: bridge
