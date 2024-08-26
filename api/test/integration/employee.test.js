@@ -1,14 +1,5 @@
 const request = require('supertest');
-const { sequelize } = require('../../models');
 const app = require('../../app');
-
-// beforeAll(async () => {
-//   await sequelize.sync({ alter: true });
-// });
-
-afterAll(async () => {
-  await sequelize.close();
-});
 
 describe('Employee API', () => {
   it('should create a new employee', async () => {
