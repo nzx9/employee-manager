@@ -80,7 +80,7 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
           borderRadius: 2,
           boxShadow: 3,
           maxWidth: 460,
-          mx: "auto", 
+          mx: "auto",
           bgcolor: "background.paper",
         }}
       >
@@ -141,14 +141,25 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({
           )}
         </FormControl>
         {alertArea}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-end",
+        }}
+      >
         <Button
           variant="outlined"
           type="submit"
           sx={{ mt: 3, width: 120 }}
-          disabled={isDisableSubmit || !Object.values(errors).every(error => error === "")}
+          disabled={
+            isDisableSubmit ||
+            !Object.values(errors).every((error) => error === "")
+          }
         >
           {buttonTxt}
         </Button>
+      </Box>
       </Box>
     </Container>
   );
