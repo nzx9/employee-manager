@@ -38,7 +38,7 @@ const updateEmployee = async (url: string,{ arg }: { arg:  UpdateEmployee }) => 
 
 const deleteEmployee = async (empid: number) => {
   try {
-    const response = await fetch(`${URL}/employee/${empid}`, {
+    const response = await fetch(`${URL}/${empid}`, {
       method: 'DELETE',
     });
 
