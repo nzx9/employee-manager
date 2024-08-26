@@ -78,6 +78,7 @@ const EmployeeList = () => {
             ADD EMPLOYEE
           </Button>
           <Fab
+            color="primary"
             aria-label="toggle view"
             onClick={toggleView}
             size="small"
