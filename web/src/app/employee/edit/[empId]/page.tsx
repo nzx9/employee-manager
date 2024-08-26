@@ -66,7 +66,7 @@ export default function EditEmployee(ctx: { params: { empId: number } }) {
     }
   };
 
-  if (error) return <div>Failed to load employee data</div>;
+  if (error) return <AlertBox alertMessage="Failed to load employee data" alertOpen={true} alertSeverity="error" onClose={() => null}/>;
   if (!employee) return <Progress/>;
 
   return (
