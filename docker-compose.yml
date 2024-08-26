@@ -50,6 +50,7 @@ services:
       - db
     networks:
       - net
+
       
 networks:
   net:
