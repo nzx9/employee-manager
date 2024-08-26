@@ -11,7 +11,6 @@ const ListViewBtn = () => {
   return (
     <Button
       variant="contained"
-      color="secondary"
       sx={{ borderRadius: 10, marginRight: 2 }}
       onClick={handleGotoListView}
     >

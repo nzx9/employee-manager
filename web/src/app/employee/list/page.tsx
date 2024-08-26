@@ -71,7 +71,6 @@ const EmployeeList = () => {
         <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
           <Button
             variant="contained"
-            color="secondary"
             startIcon={<AddIcon />}
             sx={{ borderRadius: 10, marginRight: 2 }}
             onClick={handleAddEmployee}
@@ -79,7 +78,6 @@ const EmployeeList = () => {
             ADD EMPLOYEE
           </Button>
           <Fab
-            color="secondary"
             aria-label="toggle view"
             onClick={toggleView}
             size="small"
