@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const validateEmployee = require("../validators/validate");
+const { validEmpId } = require("../validators/params");
 const { Employee } = require("../libs/db");
 
 /* GET employees listing. */
@@ -12,7 +13,7 @@ router.get("/", async (req, res) => {
 /* GET employee */
 router.get("/:empId", async (req, res) => {
   const { empId } = req.params;
-  const employees = await Employee.findById(empId);
+  const employees = await Employee.findById(validEmpId(empId));
   if (employees) res.json(employees);
   else res.status(404).json({ error: "Employee not found" });
 });
@@ -43,7 +44,9 @@ router.put("/:empId", async (req, res) => {
 
   try {
     const { empId } = req.params;
-    const employee = await Employee.findById(empId);
+
+    const employee = await Employee.findById(validEmpId(empId));
+
     if (employee) {
       const employee_new = await Employee.update(req.body, employee.empid);
       res.json(employee_new);
@@ -59,7 +62,7 @@ router.put("/:empId", async (req, res) => {
 router.delete("/:empId", async (req, res) => {
   try {
     const { empId } = req.params;
-    const employee = await Employee.findById(empId);
+    const employee = await Employee.findById(validEmpId(empId));
     if (employee) {
       await Employee.deleteById(employee.empid);
       res.status(204).end();
