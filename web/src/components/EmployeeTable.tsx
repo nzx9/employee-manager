@@ -69,7 +69,7 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({ employees, handleDelete }
               <TableCell align="center">{employee.last_name}</TableCell>
               <TableCell align="center">{employee.email}</TableCell>
               <TableCell align="center">{employee.phone}</TableCell>
-              <TableCell align="center">{employee.gender}</TableCell>
+              <TableCell align="center">{employee.gender === "M" ? "Male": "Female"}</TableCell>
               <TableCell align="center">
                 <Button
                   variant="contained"
