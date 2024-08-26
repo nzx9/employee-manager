@@ -38,7 +38,7 @@ const updateEmployee = async (url: string,{ arg }: { arg:  UpdateEmployee }) => 
 
 const deleteEmployee = async (empid: number) => {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/employee/${empid}`, {
+    const response = await fetch(`${URL}/employee/${empid}`, {
       method: 'DELETE',
     });
 
