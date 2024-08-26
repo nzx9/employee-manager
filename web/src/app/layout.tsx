@@ -5,6 +5,7 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../theme";
 import { Typography, Container, Toolbar, AppBar } from "@mui/material";
+import ViewModeProvider from "@/provider/viewModeProvider";
 
 const inter = Inter({ subsets: ["cyrillic"] });
 
@@ -42,7 +43,9 @@ const AppBarLayout = ({
           </Toolbar>
         </Container>
       </AppBar>
-      <Container maxWidth="xl" sx={{mt: 10}}>{children}</Container>
+      <Container maxWidth="xl" sx={{ mt: 10 }}>
+        {children}
+      </Container>
     </>
   );
 };
@@ -56,9 +59,11 @@ export default function RootLayout({
     <html lang="en">
       <AppRouterCacheProvider>
         <ThemeProvider theme={theme}>
-          <body className={inter.className}>
-            <AppBarLayout>{children}</AppBarLayout>
-          </body>
+          <ViewModeProvider>
+            <body className={inter.className}>
+              <AppBarLayout>{children}</AppBarLayout>
+            </body>
+          </ViewModeProvider>
         </ThemeProvider>
       </AppRouterCacheProvider>
     </html>

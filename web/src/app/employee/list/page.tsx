@@ -20,9 +20,11 @@ import { Employee } from "@/types/employee";
 import Progress from "@/components/Progress";
 import ConfirmDialog from "@/components/ConfirmDialog";
 import { URL, fetcher, deleteEmployee } from "@/utils/fetch";
+import AlertBox from "@/components/AlertBox";
+import { useViewMode } from "@/provider/viewModeProvider";
 
 const EmployeeList = () => {
-  const [viewMode, setViewMode] = useState<"grid" | "table">("grid");
+  const {viewMode, toggleViewMode} = useViewMode();
   const [open, setOpen] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(null);
 
@@ -31,15 +33,11 @@ const EmployeeList = () => {
   // Use SWR to fetch employee data
   const { data: employees, error } = useSWR(URL, fetcher);
 
-  if (error) return <div>Failed to load employees</div>;
+  if (error) return <AlertBox alertMessage="Failed to load employee data" alertOpen={true} alertSeverity="error" onClose={() => null}/>;;
   if (!employees) return <Progress/>;
 
   const toggleView = () => {
-    if (viewMode === "grid") {
-      setViewMode("table");
-    } else {
-      setViewMode("grid");
-    }
+    toggleViewMode(viewMode);
   };
 
   const handleAddEmployee = () => {
