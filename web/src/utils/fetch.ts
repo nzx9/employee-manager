@@ -1,6 +1,6 @@
 import { NewEmployee, NewEmployee as UpdateEmployee } from "@/types/employee";
 
-const URL = `${process.env.NEXT_PUBLIC_API_URL}/employee`;
+const URL = `${process.env.NODE_ENV === "development" ? process.env.NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL_PUBLIC}/employee`;
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
