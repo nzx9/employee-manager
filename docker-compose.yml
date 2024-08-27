@@ -7,6 +7,7 @@ services:
       - "3000:3000"
     depends_on:
       - api
+      - db
     networks:
       - net
 
@@ -20,6 +21,7 @@ services:
       - "15000:5000"
     depends_on:
       - db
+      - migrations
     networks:
       - net
 
@@ -30,8 +32,9 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=postgres
+      - PGDATA="/var/lib/postgresql/data/"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data/:rw
     ports:
       - "5432:5432"
     networks:
