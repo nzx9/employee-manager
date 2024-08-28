@@ -30,9 +30,9 @@ services:
     restart: always
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PASSWORD=6pOgdgnI6ltHnTQ
       - POSTGRES_DB=postgres
-      - PGDATA="/var/lib/postgresql/data/"
+      - PGDATA="/var/lib/postgresql/data"
     volumes:
       - postgres_data:/var/lib/postgresql/data/:rw
     ports:
@@ -46,7 +46,7 @@ services:
     environment:
       FLYWAY_USER: 'postgres'
       FLYWAY_MIXED: 'true'
-      FLYWAY_PASSWORD: 'postgres'
+      FLYWAY_PASSWORD: '6pOgdgnI6ltHnTQ'
       FLYWAY_URL: 'jdbc:postgresql://db:5432/postgres'
     depends_on:
       - db
